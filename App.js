@@ -1,5 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, StatusBar, Platform } from 'react-native';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
 import Decks from './components/Decks';
 import NewDecks from './components/NewDecks';
 import { Constants } from 'expo';
@@ -8,6 +11,7 @@ import { black, white, purple } from './utils/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
+import DeckDetails from './components/DeckDetails';
 
 const httpLink = new HttpLink(
   {
@@ -47,13 +51,28 @@ const Tabs = TabNavigator({
   }
 });
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckDetails: {
+    screen: DeckDetails,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple
+      }
+    }
+  }
+})
+
 export default class App extends React.Component {
   render() {
     return (
-      <ApolloProvider client={client}>
+      <ApolloProvider store={createStore(reducer)} client={client}>
         <View style={{flex:1}}>
           <MainStatusBar backgroundColor={black} barStyle='light-content'/>
-          <Tabs />
+            <MainNavigator {...this.props}/>
         </View>
       </ApolloProvider>
     );

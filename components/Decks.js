@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Platform, FlatList } from 'react-native';
+import { Text, View, StyleSheet, Platform, FlatList, TouchableOpacity } from 'react-native';
 import TextButton from './TextButton';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -14,17 +14,18 @@ const QueryAllDecks = gql`query allDecks {
   }
 }`
 
-
-CurrentDeck = ({ title, length }) => {
+CurrentDeck = ({ title, length, id }) => {
   return(
     <View>
-      <TextButton style={styles.container}>
-          <Text style={styles.titleDeckText}>
-            {title}{'\n'}
-          </Text>
-          <Text style={styles.bodyDeckText}>
-            Number of cards: {length}
-          </Text>
+      <TextButton 
+        style={styles.container} 
+        onPress={() => console.log(this.props)}>
+            <Text style={styles.titleDeckText}>
+              {title}{'\n'}
+            </Text>
+            <Text style={styles.bodyDeckText}>
+              Number of cards: {length}
+            </Text>
       </TextButton>
     </View>
   )
@@ -51,6 +52,7 @@ class Decks extends Component {
     data = this.state.decks.map(item => (
       {
         "key"   : item.id,
+        "id"    : item.id,
         "title" : item.title, 
         "length": item.numQuestions
       }
