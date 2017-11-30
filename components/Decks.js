@@ -4,7 +4,7 @@ import TextButton from './TextButton';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { AppLoading } from 'expo';
-import { white } from '../utils/colors';
+import { white, lightPurp } from '../utils/colors';
 
 const QueryAllDecks = gql`query allDecks {
   allDecks {
@@ -19,14 +19,12 @@ CurrentDeck = ({ title, length }) => {
   return(
     <View>
       <TextButton style={styles.container}>
-        <Text>
           <Text style={styles.titleDeckText}>
             {title}{'\n'}
           </Text>
-          <Text>
+          <Text style={styles.bodyDeckText}>
             Number of cards: {length}
           </Text>
-        </Text>
       </TextButton>
     </View>
   )
@@ -78,7 +76,7 @@ class Decks extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: white,
+    backgroundColor: lightPurp,
     borderRadius: Platform.OS === 'ios' ? 16 : 2,
     padding: 20,
     marginLeft: 10,
@@ -96,8 +94,18 @@ const styles = StyleSheet.create({
     },
   },
   titleDeckText: {
-    fontSize: 20,
-    fontWeight: 'bold'
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white',
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  bodyDeckText: {
+    fontSize: 15,
+    fontWeight: 'normal',
+    color: 'white',
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   titleText: {
     fontSize: 30,
