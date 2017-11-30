@@ -29,25 +29,45 @@ const db = {
   }
 };
 
+
+CurrentDeck = ({ title, length }) => {
+  return(
+    <View>
+      <TextButton style={styles.container}>
+        <Text>
+          <Text style={styles.titleDeckText}>
+            {title}{'\n'}
+          </Text>
+          <Text>
+            Number of cards: {length}
+          </Text>
+        </Text>
+      </TextButton>
+    </View>
+  )
+}
+
 class Decks extends Component {
+  renderItem = ({ item }) => {
+    return <CurrentDeck {...item}/>
+  }
   render(){
-    data = Object.keys(db).map(item => ({key: item}));
-    dataKeys = Object.keys(db);
-    dataTitles = dataKeys.map(key => ({key: db[key].title}));
-    dataQuantityQuestions = dataKeys.map(key => db[key].questions.length)
-    {console.log(dataTitles, dataQuantityQuestions)}
+    data = Object.keys(db).map(key => (
+      {
+        "key"   : key,
+        "title" : db[key].title, 
+        "length": db[key].questions.length
+      }
+    ));
+
     return(
       <View style={{flex:1}}>
+        <Text style={styles.titleText}>
+          Choose one Deck
+        </Text>
         <FlatList
           data={data}
-          renderItem={({item}) => (
-            <View>
-              <TextButton style={styles.container}>
-                {item.key}
-
-              </TextButton>
-            </View>
-          )}
+          renderItem={this.renderItem}
         />
       </View>
     );
@@ -72,6 +92,17 @@ const styles = StyleSheet.create({
       width: 0,
       height: 3
     },
+  },
+  titleDeckText: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  titleText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingTop: 30,
+    paddingBottom: 20,
   }
 })
 
