@@ -32,14 +32,21 @@ const db = {
 class Decks extends Component {
   render(){
     data = Object.keys(db).map(item => ({key: item}));
+    dataKeys = Object.keys(db);
+    dataTitles = dataKeys.map(key => ({key: db[key].title}));
+    dataQuantityQuestions = dataKeys.map(key => db[key].questions.length)
+    {console.log(dataTitles, dataQuantityQuestions)}
     return(
       <View style={{flex:1}}>
         <FlatList
           data={data}
           renderItem={({item}) => (
-            <TextButton style={styles.container}>
-              {item.key}
-            </TextButton>
+            <View>
+              <TextButton style={styles.container}>
+                {item.key}
+
+              </TextButton>
+            </View>
           )}
         />
       </View>
