@@ -20,8 +20,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "apollo-client-preset": "^1.0.3",
     "expo": "^23.0.4",
+    "graphql": "^0.11.7",
+    "graphql-tag": "^2.5.0",
     "react": "16.0.0",
+    "react-apollo": "^2.0.1",
     "react-native": "0.50.3",
     "react-native-vector-icons": "^4.4.2",
     "react-navigation": "^1.0.0-beta.21"

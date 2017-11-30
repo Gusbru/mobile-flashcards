@@ -1,33 +1,18 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Platform, FlatList } from 'react-native';
 import TextButton from './TextButton';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import { AppLoading } from 'expo';
 import { white } from '../utils/colors';
 
-// TODO: Read this from AsyncStorage
-const db = {
-  React: {
-    title: 'React',
-    questions: [
-      {
-        question: 'What is React?',
-        answer: 'A library for managing user interfaces'
-      },
-      {
-        question: 'Where do you make Ajax requests in React?',
-        answer: 'The componentDidMount lifecycle event'
-      }
-    ]
-  },
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is a closure?',
-        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-      }
-    ]
+const QueryAllDecks = gql`query allDecks {
+  allDecks {
+    id
+    title
+    numQuestions
   }
-};
+}`
 
 
 CurrentDeck = ({ title, length }) => {
@@ -48,17 +33,34 @@ CurrentDeck = ({ title, length }) => {
 }
 
 class Decks extends Component {
+
+  state = {
+    decks: []
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.QueryAllDecks.loading && !nextProps.QueryAllDecks.error) {
+      this.setState({
+        decks: nextProps.QueryAllDecks.allDecks
+      })
+    }
+  }
+
   renderItem = ({ item }) => {
     return <CurrentDeck {...item}/>
   }
   render(){
-    data = Object.keys(db).map(key => (
+    data = this.state.decks.map(item => (
       {
-        "key"   : key,
-        "title" : db[key].title, 
-        "length": db[key].questions.length
+        "key"   : item.id,
+        "title" : item.title, 
+        "length": item.numQuestions
       }
     ));
+
+    if (this.props.QueryAllDecks.loading) {
+      return <AppLoading />
+    }
 
     return(
       <View style={{flex:1}}>
@@ -106,4 +108,6 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Decks;
+export default graphql(
+  QueryAllDecks, {name: 'QueryAllDecks'}
+)(Decks);

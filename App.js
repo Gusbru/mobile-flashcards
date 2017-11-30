@@ -5,7 +5,22 @@ import NewDecks from './components/NewDecks';
 import { Constants } from 'expo';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { black, white, purple } from './utils/colors';
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloClient, HttpLink, InMemoryCache } from 'apollo-client-preset';
+
+const httpLink = new HttpLink(
+  {
+    uri: 'https://api.graph.cool/simple/v1/cjamomb1r273s014263kqmg5d'
+  }
+)
+
+const client = new ApolloClient(
+  {
+    link: httpLink,
+    cache: new InMemoryCache(),
+  }
+)
 
 function MainStatusBar({ backgroundColor, ...props}) {
   return(
@@ -35,10 +50,12 @@ const Tabs = TabNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={{flex:1}}>
-        <MainStatusBar backgroundColor={black} barStyle='light-content'/>
-        <Tabs />
-      </View>
+      <ApolloProvider client={client}>
+        <View style={{flex:1}}>
+          <MainStatusBar backgroundColor={black} barStyle='light-content'/>
+          <Tabs />
+        </View>
+      </ApolloProvider>
     );
   }
 }
