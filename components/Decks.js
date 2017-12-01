@@ -1,35 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Platform, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, Platform, FlatList } from 'react-native';
 import TextButton from './TextButton';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 import { white, lightPurp } from '../utils/colors';
-
-const QueryAllDecks = gql`query allDecks {
-  allDecks {
-    id
-    title
-    numQuestions
-  }
-}`
-
-CurrentDeck = ({ title, length, id }) => {
-  return(
-    <View>
-      <TextButton 
-        style={styles.container} 
-        onPress={() => console.log(this.props)}>
-            <Text style={styles.titleDeckText}>
-              {title}{'\n'}
-            </Text>
-            <Text style={styles.bodyDeckText}>
-              Number of cards: {length}
-            </Text>
-      </TextButton>
-    </View>
-  )
-}
+import { getDecks } from '../actions'
 
 class Decks extends Component {
 
@@ -37,30 +12,45 @@ class Decks extends Component {
     decks: []
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.QueryAllDecks.loading && !nextProps.QueryAllDecks.error) {
-      this.setState({
-        decks: nextProps.QueryAllDecks.allDecks
-      })
-    }
+  componentWillMount() {
+    this.props.getDecks();
   }
 
-  renderItem = ({ item }) => {
-    return <CurrentDeck {...item}/>
-  }
+  renderItem = ({ item }) => (
+    <View>
+      <TextButton 
+        style={styles.container} 
+        onPress={() => this.props.navigation.navigate(
+          'DeckDetails',
+          { title: item.title, length: item.length }
+        )}>
+            <Text style={styles.titleDeckText}>
+              {item.title}{'\n'}
+            </Text>
+            <Text style={styles.bodyDeckText}>
+              Number of cards: {item.length}
+            </Text>
+      </TextButton>
+    </View>
+  )
+
+  static navigationOptions = ({ navigation }) => (
+    {
+      title: 'FlashCards'
+    }
+  )
+
   render(){
-    data = this.state.decks.map(item => (
+    db = this.props.decksList;
+    data = Object.keys(db).map(key => (
       {
-        "key"   : item.id,
-        "id"    : item.id,
-        "title" : item.title, 
-        "length": item.numQuestions
+        'key': key,
+        'title': db[key].title,
+        'length': db[key].questions.length
       }
     ));
 
-    if (this.props.QueryAllDecks.loading) {
-      return <AppLoading />
-    }
+    
 
     return(
       <View style={{flex:1}}>
@@ -118,6 +108,16 @@ const styles = StyleSheet.create({
   }
 })
 
-export default graphql(
-  QueryAllDecks, {name: 'QueryAllDecks'}
-)(Decks);
+const mapStateToProps = (actions) => (
+  {
+    decksList: actions.decks,
+  }
+);
+
+const mapDispatchToProps = (dispatch) => (
+  {
+    getDecks: () => dispatch(getDecks()),
+  }
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Decks);

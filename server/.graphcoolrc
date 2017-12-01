@@ -1,3 +1,0 @@
-targets:
-  prod: shared-us-west-2/cjamomb1r273s014263kqmg5d
-  default: prod
