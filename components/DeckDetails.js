@@ -27,11 +27,20 @@ class DeckDetails extends Component {
           <TextButton 
             style={styles.container}
             onPress={() => this.props.navigation.navigate(
-              'NewCard'
+              'NewCard',
+              { title: title}
             )}>
               Add Card
           </TextButton>
-          <TextButton style={styles.container}>Start Quiz</TextButton>
+          <TextButton 
+            style={styles.container}
+            onPress={() => this.props.navigation.navigate(
+              'Quiz',
+              { title: title }
+            )}
+          >
+              Start Quiz
+          </TextButton>
         </View>
       </View>
     )

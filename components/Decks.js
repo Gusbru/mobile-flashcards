@@ -34,12 +34,6 @@ class Decks extends Component {
     </View>
   )
 
-  static navigationOptions = ({ navigation }) => (
-    {
-      title: 'FlashCards'
-    }
-  )
-
   render(){
     db = this.props.decksList;
     data = Object.keys(db).map(key => (
