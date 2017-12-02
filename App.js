@@ -7,7 +7,7 @@ import Decks from './components/Decks';
 import NewDecks from './components/NewDecks';
 import { Constants } from 'expo';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { black, white, purple } from './utils/colors';
+import { black, white, purple, lightPurp } from './utils/colors';
 import { Ionicons } from '@expo/vector-icons';
 import DeckDetails from './components/DeckDetails';
 import NewCard from './components/NewCard';
@@ -38,7 +38,13 @@ const Tabs = TabNavigator({
       tabBarIcon: ({ tintColor }) => <Ionicons name={Platform.OS === 'ios' ? 'ios-add-circle-outline' : 'md-add-circle-outline'} size={30} color={tintColor}/>
     }
   }
-});
+  }, {
+  tabBarOptions: {
+    style: {
+      backgroundColor: lightPurp,
+    },
+  }
+  });
 
 const MainNavigator = StackNavigator({
   Home: {
@@ -49,7 +55,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple
+        backgroundColor: lightPurp
       }
     }
   },
