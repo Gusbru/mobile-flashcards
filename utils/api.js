@@ -7,6 +7,12 @@ export function fetchAllDecks() {
   .then(initialData)
 }
 
+export function addNewDeck(title) {
+  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
+    [title]: "",
+  }))
+}
+
 initialData = (data) => {
   data === null
   && AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(
