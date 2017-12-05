@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Platform, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import TextButton from './TextButton';
-import { lightPurp, white, black } from '../utils/colors';
+import { styles } from '../utils/styles';
 
 class DeckDetails extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -58,52 +58,6 @@ class DeckDetails extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: lightPurp,
-    borderRadius: Platform.OS === 'ios' ? 16 : 2,
-    padding: 20,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 17,
-    marginBottom: 17,
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontWeight: 'bold',
-    fontSize: 20,
-    color: white,
-    shadowRadius: 3,
-    shadowOpacity: 0.8,
-    shadowColor: 'rgba(0, 0, 0, 0.24)',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-  },
-  titleDeckText: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: white,
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
-  bodyText: {
-    fontSize: 20,
-    fontWeight: 'normal',
-    color: black,
-    textAlign: 'center',
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
-  titleText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    paddingTop: 30,
-    paddingBottom: 20,
-  }
-})
 
 const mapStateToProps = (actions) => (
   {

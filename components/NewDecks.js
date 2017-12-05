@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { View, Text, StyleSheet, TextInput, Alert, Keyboard, Platform } from 'react-native';
 import TextButton from './TextButton';
 import { saveDeckTitle } from '../actions';
-import { lightPurp, white, black, red } from '../utils/colors';
+import { styles } from '../utils/styles';
 
 class NewDecks extends Component {
   state = {
@@ -68,55 +68,5 @@ const mapDispatchToProps = (dispatch) => (
     newDeckTitle: (title) => dispatch(saveDeckTitle(title)),
   }
 )
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: lightPurp,
-    borderRadius: Platform.OS === 'ios' ? 16 : 2,
-    padding: 20,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 17,
-    marginBottom: 17,
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowRadius: 3,
-    shadowOpacity: 0.8,
-    shadowColor: 'rgba(0, 0, 0, 0.24)',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-  },
-  deckTitleText: {
-    fontSize: 20,
-    fontWeight: 'normal',
-    color: black,
-    paddingLeft: 40,
-    paddingRight: 40,
-    paddingTop: 20,
-    paddingBottom: 20,
-    margin: 20,
-    justifyContent: 'center',
-    borderRadius: Platform.OS === 'ios' ? 16 : 2,
-    borderWidth: 2,
-  },
-  buttonText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: white,
-    paddingTop: 20,
-    paddingBottom: 20,
-    padding: 20
-  },
-  titleText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    paddingTop: 30,
-    paddingBottom: 20,
-  },
-})
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewDecks);
