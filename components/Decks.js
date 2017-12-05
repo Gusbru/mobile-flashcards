@@ -17,7 +17,7 @@ class Decks extends Component {
   }
 
   componentWillReceiveProps() {
-    console.log('willReceiveProps',this.props.decksList)
+    //console.log('willReceiveProps',this.props.decksList)
   }
 
   renderItem = ({ item }) => (
@@ -40,7 +40,7 @@ class Decks extends Component {
 
   render(){
     db = this.props.decksList;
-    console.log('decks', db)
+    //console.log('decks', db)
     data = Object.keys(db).map(key => (
       {
         'key': key,

@@ -1,11 +1,13 @@
 import {
   fetchAllDecks,
   addNewDeck,
+  addNewCard,
  } from '../utils/api';
 
 export const RECEIVE_ALL_DECKS = 'RECEIVE_ALL_DECKS';
 export const NEW_DECK_TITLE = 'NEW_DECK_TITLE';
 export const RECEIVE_CARDS = 'RECEIVE_CARDS';
+export const NEW_CARD = 'NEW_CARD';
 
 export const getDecks = () => async(dispatch) => {
   fetchAllDecks()
@@ -15,6 +17,11 @@ export const getDecks = () => async(dispatch) => {
 export const saveDeckTitle = (title) => async(dispatch) => {
   addNewDeck(title);
   dispatch(newDeckTitle(title));
+}
+
+export const saveNewCard = (deckTitle, cardDetails) => async(dispatch) => {
+  addNewCard(deckTitle, cardDetails);
+  dispatch(newCard(deckTitle, cardDetails));
 }
 
 
@@ -29,6 +36,14 @@ const newDeckTitle = (title) => (
   {
     type: NEW_DECK_TITLE,
     decks: title
+  }
+)
+
+const newCard = (deckTitle, cardDetails) => (
+  {
+    type: NEW_CARD,
+    decks: deckTitle,
+    cardQuestion: cardDetails,
   }
 )
 

@@ -8,14 +8,40 @@ export function fetchAllDecks() {
 }
 
 export function addNewDeck(title) {
-  console.log('api', title)
   const newDeck = {
     [title]: {
       'title': title,
       questions: [],
     },
   }
-  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(newDeck));  
+  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(newDeck));
+}
+
+export const addNewCard = (deckTitle, cardDetails) => {
+  try {
+    AsyncStorage.getItem(STORAGE_KEY)
+    .then(data => includeCard(JSON.parse(data), deckTitle, cardDetails));
+  } catch (error) {
+    // Error retrieving data
+  }
+  
+}
+
+includeCard = (data, deckTitle, cardDetails) => {
+  const newCard = {
+    [deckTitle]: {
+      'title': deckTitle,
+      'questions': [
+        ...data[deckTitle].questions,
+        cardDetails
+      ]
+    }
+  }
+  const newData = {
+    ...data,
+    ...newCard,
+  }
+  AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newData));
 }
 
 initialData = (data) => {

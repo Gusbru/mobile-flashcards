@@ -15,7 +15,7 @@ class DeckDetails extends Component {
 
   render(){
     const title = this.props.navigation.state.params.title;
-    const length = this.props.navigation.state.params.length;
+    const length = this.props.decksList[title].questions.length;
 
     return(
       <View style={{flex:1, justifyContent: 'space-between'}}>
