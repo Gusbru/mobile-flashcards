@@ -8,9 +8,14 @@ export function fetchAllDecks() {
 }
 
 export function addNewDeck(title) {
-  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
-    [title]: "",
-  }))
+  console.log('api', title)
+  const newDeck = {
+    [title]: {
+      'title': title,
+      questions: [],
+    },
+  }
+  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(newDeck));  
 }
 
 initialData = (data) => {

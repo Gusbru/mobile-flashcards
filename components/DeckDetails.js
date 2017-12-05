@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform, Alert } from 'react-native';
 import { connect } from 'react-redux';
 import TextButton from './TextButton';
 import { lightPurp, white, black } from '../utils/colors';
@@ -34,10 +34,22 @@ class DeckDetails extends Component {
           </TextButton>
           <TextButton 
             style={styles.container}
-            onPress={() => this.props.navigation.navigate(
-              'Quiz',
-              { title: title }
-            )}
+            onPress={length !== 0 
+              ? 
+                () => this.props.navigation.navigate(
+                  'Quiz',
+                { title: title }
+                )
+              :
+                () => Alert.alert(
+                  'Hey!!',
+                  'Please, add questions first!',
+                  [
+                    {text: 'OK', onPress: () => console.log('Ask me later pressed')}
+                  ],
+                  { cancelable: false }
+                )
+            }
           >
               Start Quiz
           </TextButton>

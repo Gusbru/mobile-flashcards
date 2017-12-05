@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { connect } from 'react-redux';
+import { View, Text, StyleSheet, TextInput, Alert, Keyboard } from 'react-native';
 import TextButton from './TextButton';
 import { saveDeckTitle } from '../actions';
 
@@ -9,10 +10,25 @@ class NewDecks extends Component {
   }
 
   updateTitle = () => {
-    saveDeckTitle(this.state.title);
-    this.setState({
-      title: ''
-    });
+    if(this.state.title !== ''){
+      this.props.newDeckTitle(this.state.title)
+      this.setState({
+        title: ''
+      });
+      this.props.navigation.navigate(
+        'Decks'
+      );
+    } else {
+      Alert.alert(
+        'Hey!!',
+        'Please, fill the title name!',
+        [
+          {text: 'OK', onPress: () => console.log('Ask me later pressed')}
+        ],
+        { cancelable: false }
+      );
+      console.log('Please, fill the title name');
+    }
   }
 
   render(){
@@ -25,6 +41,7 @@ class NewDecks extends Component {
           placeholder="Deck Title"
           value={this.state.title}
           onChangeText={(title) => this.setState({title})}
+          onSubmitEditing={Keyboard.dismiss}
         />
         <TextButton
         onPress={() => this.updateTitle()}>
@@ -45,4 +62,16 @@ const styles = StyleSheet.create({
   }
 })
 
-export default NewDecks;
+const mapStateToProps = (actions) => (
+  {
+
+  }
+)
+
+const mapDispatchToProps = (dispatch) => (
+  {
+    newDeckTitle: (title) => dispatch(saveDeckTitle(title)),
+  }
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewDecks);

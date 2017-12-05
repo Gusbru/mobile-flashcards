@@ -12,15 +12,11 @@ export const getDecks = () => async(dispatch) => {
   .then(data => dispatch(insertDecks(data)))
 }
 
-// export const saveDeckTitle = (title) => async(dispatch) => {
-//   console.log('action', title)
-//   addNewDeck(title)
-//   .then(title => dispatch(newDeckTitle(title)))
-// }
-
 export const saveDeckTitle = (title) => async(dispatch) => {
-  console.log(title)
+  addNewDeck(title);
+  dispatch(newDeckTitle(title));
 }
+
 
 const insertDecks = (decks) => (
   {
@@ -32,7 +28,7 @@ const insertDecks = (decks) => (
 const newDeckTitle = (title) => (
   {
     type: NEW_DECK_TITLE,
-    deckTitle: title
+    decks: title
   }
 )
 

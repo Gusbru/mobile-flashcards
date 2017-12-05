@@ -7,7 +7,8 @@ import {
 
 
 function decks(state = {}, action) {
-  const currentDeck = action.deck;
+
+  const currentDeckTitle = action.decks;
 
   switch(action.type) {
     case RECEIVE_ALL_DECKS:
@@ -18,7 +19,10 @@ function decks(state = {}, action) {
     case NEW_DECK_TITLE:
       return {
         ...state,
-        deckTitle: ''
+        currentDeckTitle: {
+          title: currentDeckTitle,
+          questions: [],
+        } 
       }
     default:
       return state;
