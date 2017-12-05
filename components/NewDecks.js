@@ -17,7 +17,8 @@ class NewDecks extends Component {
         title: ''
       });
       this.props.navigation.navigate(
-        'Decks'
+        'DeckDetails',
+        {title: this.state.title}
       );
     } else {
       Alert.alert(

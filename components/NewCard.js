@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Platform, TextInput, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, Platform, TextInput, Keyboard, KeyboardAvoidingView } from 'react-native';
 import TextButton from './TextButton';
 import { connect } from 'react-redux';
 import { lightPurp, white, black, red } from '../utils/colors';
@@ -33,7 +33,12 @@ class NewCard extends Component {
 
   render(){
     return(
-      <View style={{flex:1, justifyContent: 'space-between'}}>
+      <KeyboardAvoidingView
+        style={{flex:1, justifyContent: 'space-between'}}
+        keyboardVerticalOffset={200}
+        behavior='padding'
+      >
+      
         <Text 
           style={styles.titleText}
         >
@@ -72,8 +77,7 @@ class NewCard extends Component {
         >
           Submit
         </TextButton>
-
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
