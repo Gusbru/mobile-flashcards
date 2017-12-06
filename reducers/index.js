@@ -4,7 +4,9 @@ import {
   RECEIVE_ALL_DECKS ,
   NEW_DECK_TITLE,
   NEW_CARD,
+  NEW_CARD_NEW_DECK,
 } from '../actions';
+
 
 
 function decks(state = {}, action) {
@@ -32,6 +34,16 @@ function decks(state = {}, action) {
           title: currentDeckTitle,
           questions: [
             ...state[currentDeckTitle].questions,
+            action.cardQuestion
+          ],
+        },
+      }
+    case NEW_CARD_NEW_DECK:
+      return{
+        ...state,
+        [currentDeckTitle]: {
+          title: currentDeckTitle,
+          questions: [
             action.cardQuestion
           ],
         },

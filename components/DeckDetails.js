@@ -5,12 +5,25 @@ import TextButton from './TextButton';
 import { styles } from '../utils/styles';
 
 class DeckDetails extends Component {
+
+  state = {
+    title: '',
+    newDeck: ''
+  }
+
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params
 
     return {
       title: title
     }
+  }
+
+  componentDidMount() {
+    this.setState({
+      title: this.props.navigation.state.params.title,
+      newDeck: this.props.navigation.state.params.newDeck === true ? true : false,
+    })
   }
 
   render(){
@@ -33,7 +46,10 @@ class DeckDetails extends Component {
             style={styles.container}
             onPress={() => this.props.navigation.navigate(
               'NewCard',
-              { title: title}
+              { 
+                title: title,
+                newDeck: this.state.newDeck
+              }
             )}>
               Add Card
           </TextButton>

@@ -7,7 +7,8 @@ import { styles } from '../utils/styles';
 
 class NewDecks extends Component {
   state = {
-    title: ''
+    title: '',
+    questions: []
   }
 
   updateTitle = () => {
