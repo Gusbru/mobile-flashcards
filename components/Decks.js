@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 import { getDecks } from '../actions'
 import { styles } from '../utils/styles';
+import { Ionicons } from '@expo/vector-icons';
 
 class Decks extends Component {
 
@@ -15,6 +16,11 @@ class Decks extends Component {
   componentWillMount() {
     this.props.getDecks();
   }
+
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title:  'FlashCards',
+    headerLeft: null,
+  });
 
   renderItem = ({ item }) => (
     <View>

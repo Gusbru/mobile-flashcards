@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Platform, Alert, Icon } from 'react-native';
 import { connect } from 'react-redux';
 import TextButton from './TextButton';
 import { styles } from '../utils/styles';
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons';
+import { white } from '../utils/colors';
 
 class DeckDetails extends Component {
 
@@ -12,16 +13,14 @@ class DeckDetails extends Component {
     newDeck: ''
   }
 
-  // static navigationOptions = ({ navigation }) => {
-  //   const { title } = navigation.state.params
-
-  //   return {
-  //     title: title,
-  //   }
-  // }
   static navigationOptions = ({ navigation, screenProps }) => ({
-    title:  'Header Title',
-    headerLeft: <Ionicons name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'} onPress={() => navigation.navigate('Decks')}/>,
+    title:  navigation.state.params.title,
+    headerLeft: <Ionicons 
+                  name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'} 
+                  onPress={() => navigation.navigate('Decks')}
+                  size={Platform.OS === 'ios' ? 30: 20}
+                  style={ {paddingLeft:15, paddingRight:15, color:white} }
+                />,
   });
 
   componentWillMount() {
