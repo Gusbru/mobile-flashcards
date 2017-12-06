@@ -33,6 +33,35 @@ class DeckDetails extends Component {
     })
   }
 
+  startQuiz = () => {
+    if (this.state.length !== 0) {
+      this.props.navigation.navigate(
+        'Quiz',
+        { 
+          title: this.state.title,
+        }
+      )
+    } else {
+      Alert.alert(
+        'Hey!!',
+        'Please, add questions first!',
+        [
+          {text: 'OK'}
+        ],
+        { cancelable: false }
+      )
+    }
+  }
+
+  addCard = () => {
+    this.props.navigation.navigate(
+      'NewCard',
+      { 
+        title: this.state.title,
+      }
+    )
+  }
+
   render(){
     return(
       <View style={{flex:1, justifyContent: 'space-between'}}>
@@ -43,32 +72,12 @@ class DeckDetails extends Component {
         <View>
           <TextButton 
             style={[styles.container, styles.buttonText]}
-            onPress={() => this.props.navigation.navigate(
-              'NewCard',
-              { 
-                title: this.state.title,
-              }
-            )}>
+            onPress={() => this.addCard()}>
               Add Card
           </TextButton>
           <TextButton 
             style={[styles.container, styles.buttonText]}
-            onPress={this.state.length !== 0 
-                      ? () => this.props.navigation.navigate(
-                          'Quiz',
-                          { 
-                            title: this.state.title,
-                          }
-                        )
-                      : () => Alert.alert(
-                          'Hey!!',
-                          'Please, add questions first!',
-                          [
-                            {text: 'OK'}
-                          ],
-                          { cancelable: false }
-                        )
-                    }
+            onPress={() => this.startQuiz()}
           >
               Start Quiz
           </TextButton>

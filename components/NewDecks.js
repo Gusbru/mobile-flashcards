@@ -21,7 +21,6 @@ class NewDecks extends Component {
         'DeckDetails',
         {
           title: this.state.title,
-          newDeck: true,
         }
       );
     } else {
