@@ -15,7 +15,12 @@ class DeckDetails extends Component {
 
   render(){
     const title = this.props.navigation.state.params.title;
-    const length = this.props.decksList[title].questions.length;
+    let length;
+    if (this.props.navigation.state.params.newDeck === true) {
+      length = 0;
+    } else {
+      length = this.props.decksList[title].questions.length;
+    }
 
     return(
       <View style={{flex:1, justifyContent: 'space-between'}}>
