@@ -12,13 +12,16 @@ class NewDecks extends Component {
 
   updateTitle = () => {
     if(this.state.title !== ''){
-      this.props.newDeckTitle(this.state.title)
+      this.props.newDeckTitle(this.state.title);
       this.setState({
         title: ''
       });
       this.props.navigation.navigate(
         'DeckDetails',
-        {title: this.state.title}
+        {
+          title: this.state.title,
+          newDeck: true,
+        }
       );
     } else {
       Alert.alert(

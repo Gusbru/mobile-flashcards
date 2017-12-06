@@ -88,13 +88,18 @@ class Quiz extends Component {
 
   resetQuiz = () => {
     this.setState({
-      title: this.props.navigation.state.params.title,
-      currentQuestion: questions[0].question,
+      currentQuestion: this.state.questions[0].question,
+      currentAnswer: '',
       questionNumber: 1,
-      numberOfQuestions: questions.length,
-      questions: questions,
+      score: 0,
       quizFinished: false,
-    })
+    });
+  }
+
+  backToDeck = () => {
+    this.props.navigation.navigate(
+      'Decks'
+    );
   }
 
   render() {
@@ -122,13 +127,16 @@ class Quiz extends Component {
             <Text style={styles.questionText}>Review</Text>
             <Text style={styles.questionText}>Correct answers: {this.state.score}</Text>
             <Text style={styles.questionText}>Total questions: {this.state.numberOfQuestions}</Text>
+            <Text style={styles.questionText}>Your Final Grade: {this.state.score/this.state.numberOfQuestions}</Text>
             <TextButton 
               style={[styles.container, styles.buttonText]}
+              onPress={() => this.resetQuiz()}
             >
                 Restart Quiz
             </TextButton>
             <TextButton
               style={[styles.container, styles.buttonText]}
+              onPress={() => this.backToDeck()}
             >
               Back to Deck
             </TextButton>
