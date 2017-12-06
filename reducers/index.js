@@ -4,7 +4,6 @@ import {
   RECEIVE_ALL_DECKS ,
   NEW_DECK_TITLE,
   NEW_CARD,
-  NEW_CARD_NEW_DECK,
 } from '../actions';
 
 

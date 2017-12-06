@@ -22,7 +22,7 @@ class NewCard extends Component {
 
   insertNewCard = () => {
     const card = this.state;
-    this.props.newCard(this.props.navigation.state.params.title, card, this.props.navigation.state.params.newDeck);
+    this.props.newCard(this.props.navigation.state.params.title, card);
     this.setState(
       {
         question: '',
@@ -97,7 +97,7 @@ const mapStateToProps = (actions) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    newCard: (title, cardDetails, newDeck) => dispatch(saveNewCard(title, cardDetails, newDeck)),
+    newCard: (title, cardDetails) => dispatch(saveNewCard(title, cardDetails)),
   }
 );
 

@@ -8,7 +8,6 @@ export const RECEIVE_ALL_DECKS = 'RECEIVE_ALL_DECKS';
 export const NEW_DECK_TITLE = 'NEW_DECK_TITLE';
 export const RECEIVE_CARDS = 'RECEIVE_CARDS';
 export const NEW_CARD = 'NEW_CARD';
-export const NEW_CARD_NEW_DECK = 'NEW_CARD_NEW_DECK';
 
 export const getDecks = () => async(dispatch) => {
   try {
@@ -28,10 +27,10 @@ export const saveDeckTitle = (title) => async(dispatch) => {
   }
 }
 
-export const saveNewCard = (deckTitle, cardDetails, newDeck) => async(dispatch) => {
+export const saveNewCard = (deckTitle, cardDetails) => async(dispatch) => {
   try {
     addNewCard(deckTitle, cardDetails);
-    dispatch(newCard(deckTitle, cardDetails, newDeck));
+    dispatch(newCard(deckTitle, cardDetails));
   } catch (error) {
     console.error('Error saving new card', error)
   }
@@ -53,7 +52,7 @@ const newDeckTitle = (title) => (
   }
 )
 
-const newCard = (deckTitle, cardDetails, newDeck) => (
+const newCard = (deckTitle, cardDetails) => (
   {
     type: NEW_CARD,
     decks: deckTitle,
