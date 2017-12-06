@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import DeckDetails from './components/DeckDetails';
 import NewCard from './components/NewCard';
 import Quiz from './components/Quiz';
+import { setLocalNotification } from './utils/helpers';
 
 function MainStatusBar({ backgroundColor, ...props}) {
   return(
@@ -80,6 +81,11 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={ store }>
