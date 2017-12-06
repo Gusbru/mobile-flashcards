@@ -20,8 +20,12 @@ export const getDecks = () => async(dispatch) => {
 }
 
 export const saveDeckTitle = (title) => async(dispatch) => {
-  addNewDeck(title);
-  dispatch(newDeckTitle(title));
+  try {
+    addNewDeck(title);
+    dispatch(newDeckTitle(title));
+  } catch (error) {
+
+  }
 }
 
 export const saveNewCard = (deckTitle, cardDetails, newDeck) => async(dispatch) => {

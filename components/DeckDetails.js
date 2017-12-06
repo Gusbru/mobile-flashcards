@@ -19,7 +19,7 @@ class DeckDetails extends Component {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState({
       title: this.props.navigation.state.params.title,
       newDeck: this.props.navigation.state.params.newDeck === true ? true : false,

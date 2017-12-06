@@ -28,7 +28,14 @@ class NewCard extends Component {
         question: '',
         answer: ''
       }
-    ); 
+    );
+    this.props.navigation.navigate(
+      'DeckDetails',
+      {
+        title: this.props.navigation.state.params.title,
+        newDeck: false,
+      }
+    );
   }
 
   render(){
