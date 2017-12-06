@@ -39,7 +39,6 @@ class Quiz extends Component {
   updateQuestion = () => {
     const newQuestionNumber = this.state.questionNumber + 1;
     if (newQuestionNumber-1 < this.state.numberOfQuestions) {
-      console.log(this.state.questionNumber)
       this.setState({
         currentAnswer: '',
         currentQuestion: this.state.questions[newQuestionNumber-1].question,
@@ -73,11 +72,10 @@ class Quiz extends Component {
         'Hey!!',
         'Please, see answer first!',
         [
-          {text: 'OK', onPress: () => console.log('Ask me later pressed')}
+          {text: 'OK'}
         ],
         { cancelable: false }
       );
-      return console.log('please, see answer first');
     }
 
     if (isCorrect) {

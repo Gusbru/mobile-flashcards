@@ -28,11 +28,10 @@ class NewDecks extends Component {
         'Hey!!',
         'Please, fill the title name!',
         [
-          {text: 'OK', onPress: () => console.log('Ask me later pressed')}
+          {text: 'OK'}
         ],
         { cancelable: false }
       );
-      console.log('Please, fill the title name');
     }
   }
 

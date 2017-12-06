@@ -22,7 +22,7 @@ export const addNewCard = (deckTitle, cardDetails) => {
     AsyncStorage.getItem(STORAGE_KEY)
     .then(data => includeCard(JSON.parse(data), deckTitle, cardDetails));
   } catch (error) {
-    // Error retrieving data
+    console.error('Error saving new card to file', error);
   }
   
 }

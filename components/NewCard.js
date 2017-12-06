@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Keyboard, KeyboardAvoidingView } from 'react-native';
+import { View, Text, TextInput, Keyboard, KeyboardAvoidingView, Alert } from 'react-native';
 import TextButton from './TextButton';
 import { connect } from 'react-redux';
 import { saveNewCard } from '../actions';
@@ -22,6 +22,17 @@ class NewCard extends Component {
 
   insertNewCard = () => {
     const card = this.state;
+    if (card.answer === '' || card.question === '') {
+      Alert.alert(
+        'Hey!!',
+        'Please, fill the card correctly!',
+        [
+          { text: 'OK' }
+        ],
+        { cancelable: false }
+      );
+      return;
+    }
     this.props.newCard(this.props.navigation.state.params.title, card);
     this.setState(
       {

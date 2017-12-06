@@ -14,7 +14,7 @@ export const getDecks = () => async(dispatch) => {
     fetchAllDecks()
     .then(data => dispatch(insertDecks(data)))
   } catch(error) {
-
+    console.error('Error reading decks from file', error);
   }
 }
 
@@ -23,7 +23,7 @@ export const saveDeckTitle = (title) => async(dispatch) => {
     addNewDeck(title)
     dispatch(newDeckTitle(title));
   } catch (error) {
-
+    console.error('Error saving new deck', error);
   }
 }
 
@@ -32,7 +32,7 @@ export const saveNewCard = (deckTitle, cardDetails) => async(dispatch) => {
     addNewCard(deckTitle, cardDetails);
     dispatch(newCard(deckTitle, cardDetails));
   } catch (error) {
-    console.error('Error saving new card', error)
+    console.error('Error saving new card', error);
   }
   
 }
