@@ -22,7 +22,7 @@ function decks(state = {}, action) {
     case NEW_DECK_TITLE:
       return {
         ...state,
-        currentDeckTitle: {
+        [currentDeckTitle]: {
           title: currentDeckTitle,
           questions: [],
         } 
@@ -34,16 +34,6 @@ function decks(state = {}, action) {
           title: currentDeckTitle,
           questions: [
             ...state[currentDeckTitle].questions,
-            action.cardQuestion
-          ],
-        },
-      }
-    case NEW_CARD_NEW_DECK:
-      return{
-        ...state,
-        [currentDeckTitle]: {
-          title: currentDeckTitle,
-          questions: [
             action.cardQuestion
           ],
         },

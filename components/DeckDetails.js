@@ -10,7 +10,7 @@ class DeckDetails extends Component {
 
   state = {
     title: '',
-    newDeck: ''
+    length: ''
   }
 
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -23,58 +23,52 @@ class DeckDetails extends Component {
                 />,
   });
 
-  componentWillMount() {
+  componentDidMount() {
+    const data = this.props.decksList
+    const title = this.props.navigation.state.params.title;
+    const length = data[title].questions.length;
     this.setState({
-      title: this.props.navigation.state.params.title,
-      newDeck: this.props.navigation.state.params.newDeck === true ? true : false,
+      title: title,
+      length: length,
     })
   }
 
   render(){
-    const title = this.props.navigation.state.params.title;
-    let length;
-    if (this.props.navigation.state.params.newDeck === true) {
-      length = 0;
-    } else {
-      length = this.props.decksList[title].questions.length;
-    }
-
     return(
       <View style={{flex:1, justifyContent: 'space-between'}}>
         <View>
-          <Text style={styles.titleText}>{title}</Text>
-          <Text style={styles.bodyText}>{length} cards</Text>
+          <Text style={styles.titleText}>{this.state.title}</Text>
+          <Text style={styles.bodyText}>{this.state.length} cards</Text>
         </View>
         <View>
           <TextButton 
-            style={styles.container}
+            style={[styles.container, styles.buttonText]}
             onPress={() => this.props.navigation.navigate(
               'NewCard',
               { 
-                title: title,
-                newDeck: this.state.newDeck
+                title: this.state.title,
               }
             )}>
               Add Card
           </TextButton>
           <TextButton 
-            style={styles.container}
-            onPress={length !== 0 
-              ? 
-                () => this.props.navigation.navigate(
-                  'Quiz',
-                { title: title }
-                )
-              :
-                () => Alert.alert(
-                  'Hey!!',
-                  'Please, add questions first!',
-                  [
-                    {text: 'OK', onPress: () => console.log('Ask me later pressed')}
-                  ],
-                  { cancelable: false }
-                )
-            }
+            style={[styles.container, styles.buttonText]}
+            onPress={this.state.length !== 0 
+                      ? () => this.props.navigation.navigate(
+                          'Quiz',
+                          { 
+                            title: this.state.title,
+                          }
+                        )
+                      : () => Alert.alert(
+                          'Hey!!',
+                          'Please, add questions first!',
+                          [
+                            {text: 'OK'}
+                          ],
+                          { cancelable: false }
+                        )
+                    }
           >
               Start Quiz
           </TextButton>

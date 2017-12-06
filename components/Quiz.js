@@ -104,7 +104,7 @@ class Quiz extends Component {
 
   render() {
     return(
-      <View>
+      <View style={{flex:1, justifyContent: 'space-between'}}>
         <View style={styles.header}>
           <Text style={{fontSize: 20, alignItems: 'flex-start'}}>{this.state.title} Quiz</Text>
           <Text style={{fontSize: 20, alignItems: 'flex-end'}}>Score: {this.state.score}</Text>
@@ -127,7 +127,7 @@ class Quiz extends Component {
             <Text style={styles.questionText}>Review</Text>
             <Text style={styles.questionText}>Correct answers: {this.state.score}</Text>
             <Text style={styles.questionText}>Total questions: {this.state.numberOfQuestions}</Text>
-            <Text style={styles.questionText}>Your Final Grade: {this.state.score/this.state.numberOfQuestions}</Text>
+            <Text style={styles.questionText}>Your Scored: {(this.state.score/this.state.numberOfQuestions*100.0).toFixed(0)}%</Text>
             <TextButton 
               style={[styles.container, styles.buttonText]}
               onPress={() => this.resetQuiz()}
