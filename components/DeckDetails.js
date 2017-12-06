@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Platform, Alert } from 'react-native';
+import { View, Text, StyleSheet, Platform, Alert, Icon } from 'react-native';
 import { connect } from 'react-redux';
 import TextButton from './TextButton';
 import { styles } from '../utils/styles';
+import { Ionicons } from '@expo/vector-icons'
 
 class DeckDetails extends Component {
 
@@ -11,13 +12,17 @@ class DeckDetails extends Component {
     newDeck: ''
   }
 
-  static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params
+  // static navigationOptions = ({ navigation }) => {
+  //   const { title } = navigation.state.params
 
-    return {
-      title: title
-    }
-  }
+  //   return {
+  //     title: title,
+  //   }
+  // }
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title:  'Header Title',
+    headerLeft: <Ionicons name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'} onPress={() => navigation.navigate('Decks')}/>,
+  });
 
   componentWillMount() {
     this.setState({
