@@ -1,10 +1,16 @@
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
+## Introduction
 
-Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
+This application is a FlashCard where you can study topics in a fan way, by answering 
+questions as registering if your answer is correct or not. In the end, you can see your
+progress. Also, you can add more cards to become your studies more fun and efficient.  
 
-## Table of Contents
+This project is part of the React Nanodegree Program from Udacity (https://www.udacity.com).
 
-### Installation
+This project is build using React-Native library and can be run in both iOS and Android systems.
+
+
+
+## Installation
 To install the application, first you need to have `Expo` installed in your mobile device.
 Follow instruction at: (https://expo.io/). 
 
@@ -31,7 +37,7 @@ the application can be run in both iOS and/or Android systems.
 We expect to made a public version of this application in the App Store and
 Play Store very soon :)
 
-### Using the FlashCards
+## Using the FlashCards
 
 When you start the application, for the first time, you can see two decks of cards:
 React and JavaScript. You can start a quiz with the cards that are already in these
