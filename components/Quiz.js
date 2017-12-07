@@ -76,6 +76,7 @@ class Quiz extends Component {
         ],
         { cancelable: false }
       );
+      return;
     }
 
     if (isCorrect) {
